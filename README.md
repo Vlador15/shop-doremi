@@ -5,12 +5,11 @@
     Задача: написать с full-stack интернет магазин с личным кабинетом, каталогом, самодельным чатом, админ страницами, выгрузкой данных и прочее <br>
     <b>Важно: сайт должен работать автономно, без участия менеджеров, за счет интеграции с VK (парсинг товаров, отзывов и тд)</b> <br>
     За основу (frontend) был взят макет, который в последствии был полностью адаптирован под текущий проект <br>
-    Backend писался с нуля, вся архитектура, логика, restful api входили в мои задачи.
-
-    <a href="https://vk.com/spectradev?w=wall-196405123_9" target="_blank">Подробнее про проект...</a>
-
+    Backend писался с нуля, вся архитектура, логика, restful api входили в мои задачи.   
 </p>
-
+<hr>
+<a href="https://vk.com/spectradev?w=wall-196405123_9" target="_blank">Подробнее про проект...</a>
+<hr>
 <p>Стек:</p>
 <ul>
     <li>Node.js</li>
@@ -21,7 +20,7 @@
     <li>Css</li>
     <li>Javascript</li>
 </ul>
-
+<hr>
 <p>На сайте имеется:</p>
 <ul>
     <li>Были добавлены разделы с актуальными товарами, сделан поиск по всем товарам (оптимизированный)</li>
@@ -45,9 +44,9 @@
     <li>Был сделан самодельный чат, который отправлял все вопросы с сайта в беседу ВК. В беседе можно было также ответить на заданный вопрос.</li>
     <li>Также в беседу ВК отправляются уведомления об успешном заказе, отмене заказа и тд.</li>
 </ul>
-
+<hr>
 <a href="https://drive.google.com/drive/folders/1TgrxxrXYvGA7fy_rQAhgC_bit-T5aUPR" target="_blank">Посмотреть фотографии проекта</a>
-
+<hr>
 <img src="https://sun9-16.userapi.com/impg/t7anTR48OR7MYAObH7DpiKmtOYSSDN3y7hGrjw/odAqPjEZJjw.jpg?size=1600x784&quality=96&sign=103e565f69f9ab4ea56781de4b4f0020&type=album" max-width="600" />
 <img src="https://sun9-26.userapi.com/impg/5-6Ad0NMsiSIxqCkBqokSO00If9LPifMBW5rYQ/tSmC9lYTAYc.jpg?size=300x501&quality=96&sign=e64c98ffdaa8efc39f131284b436a3d4&type=album" max-width="600" />
 <img src="https://sun9-84.userapi.com/impg/MKcpJaAZEQykVu9WTPy5dY9cBcVIQfestNVfXA/ICnedbkoqx0.jpg?size=1340x768&quality=96&sign=c9df71921ff97a6b7134441cde64e186&type=album" max-width="600" />
