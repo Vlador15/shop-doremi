@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)/ -->
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head>
+      <%- include('includes/head')%> 
+   </head>
+
+
+   <body>
+      <%- include('includes/header')%> 
+      <div class="wrapper wrapper-shift"> 
+         
+         <div class="content-container" id="content-container-block">
+            <%- include('includes/menu')%> 
+
+            <script src="./scripts/search.js"></script>  
+            <div id="common-home" class="container-fluid">
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                
+                     <ul class="breadcrumb" style="margin-bottom: 50px;">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/search">Поиск</a></li>
+                     </ul>
+                      
+                     <script type="text/javascript">searchProducts(<%- JSON.stringify(query) %>, <%- JSON.stringify(lengthCatalog) %>)</script>
+
+                     <div id="loading" class="text-center"> 
+                        <img src="https://felixnn.ru/vetmanager/img/load.gif" style="width: 130px; height: 130px;">
+                     </div>  
+
+                     <div id="noresult" class="text-center" style="display: none;"> 
+                        <h4>Упс... Товаров по такому запросу не найдено...</h4>
+                     </div>  
+       
+                     <div class="row no-gutters" id="products">
+                        
+                     </div>  
+            
+                  </div> 
+               </div>
+            </div>         
+             
+
+            <div class="height-indent" style="margin-top: 100px;"></div>
+            <%- include('includes/insert')%>     
+         </div>
+      </div>    
+      <%- include('includes/footer')%>  
+   </body>
+</html>
+
+
+ 

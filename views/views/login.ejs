@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+       
+      <!-- Menu !--> 
+      <%- include('includes/header')%> 
+      <div class="wrapper wrapper-shift">   
+          
+         <div class="content-container">
+            <%- include('includes/menu')%>   
+  
+            <div id="account-login" class="container-fluid" style="margin-left: 15px;">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/my-account">Личный Кабинет</a></li>
+                  <li><a href="/login">Авторизация</a></li>
+               </ul>
+               <% 
+                  if ( err != false ) {
+                  %> 
+               <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> <%- err %> </div>
+               <%
+                  }
+                  %>
+               <div class="row">
+                  <div id="content" class="col-sm-9">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <h2>Вход</h2>
+                           <div class="login-form">
+                              <p><strong>Войти в Личный Кабинет</strong></p>
+                              <form action="/login" method="post" enctype="multipart/form-data">
+                                 <div class="form-group">
+                                    <input type="tel" name="phone" value="" placeholder="Телефон" id="input-telephone" class="form-control" data-validate> 
+                                 </div>
+                                 <div class="form-group">
+                                    <input type="password" name="password" value="" placeholder="Пароль" id="input-password" class="form-control" required="">               
+                                    <!--<a href="forgot-password" class="forgot-link link-bottom">Забыли пароль?</a>!-->
+                                 </div>
+                                 <input type="submit" value="Войти" class="btn btn-primary">
+                                 <a href="create-account" class="btn btn-link">Регистрация</a>   
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll-top" onclick="jQuery(window).scrollTop(0)"><span class="scroll-top__arrow"></span>В начало страницы</div>
+            
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

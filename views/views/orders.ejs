@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      <!-- Menu !--> 
+      <%- include('includes/header')%>
+      <div class="wrapper wrapper-shift">    
+
+         <div class="content-container">
+            <%- include('includes/menu')%>  
+            <div id="checkout-cart" class="container-fluid">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/orders">Заказы</a></li>
+               </ul>
+               <% if (!products.length) { %>
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <h1>Ваши заказы</h1>
+                     <p>У вас нет заказов!</p>
+                     <div class="buttons clearfix">
+                        <div class="pull-right"><a href="/catalog" class="btn btn-primary">Продолжить</a></div>
+                     </div>
+                  </div>
+               </div>
+               <% } else { %>
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <form action="cart/update" method="post" enctype="multipart/form-data">
+                        <h1>Список ваших заказов</h1>
+                       
+                        <div class="table-responsive">
+
+                           <table class="table table-bordered">
+                              <thead style="background-color: #474747; color: #fff;">
+                                 <tr>
+                                    <th class="text-center">Открыть</th>
+                                    <th class="text-center">Номер заказа</th>
+                                    <th class="text-left">Дата заказа</th>
+                                    <th class="text-left">Комментарий</th>
+                                    <th class="text-left">Способ доставки</th>
+                                    <th class="text-left">Товаров</th>
+                                    <th class="text-left">К оплате</th>
+                                    <th class="text-center">Отменить</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <%   
+                                        
+                                       let totalPrice = 0;
+                                       for (i = 0; i < products.length; i++) { 
+                                          let product = products[i];    
+                                            
+
+                                          function spaces(string) {
+                                            if (typeof string !== "string") string = string.toString();
+                                            return string.split("").reverse().join("").match(/[0-9]{1,3}/g).join(" ").split("").reverse().join("") + 'руб.';
+                                          };
+                                       %> 
+                                    
+                                    <td class="text-center"> 
+                                       <a href="orders/<%- product.id %>">Открыть</a>
+                                    </td>
+                                    <td class="text-center"> 
+                                       <%- product.id %>
+                                    </td>
+                                    <td class="text-left" style="width: 20%;">
+                                       <%- product.date %>                                                                      
+                                    </td>
+                                    <td class="text-left">
+                                       <%- product.comment %>
+                                    </td>
+                                    <td class="text-left" style="width: 20%;">  
+                                       <%- product.delivery %>
+                                    </td>
+                                    <td class="text-left"><%- product.count %></td>
+                                    <td class="text-left"><%- spaces(product.totalPrice) %></td>
+                                    <td class="text-center">
+                                       <a href="orders/delete/<%- product.id %>">
+                                          <button type="button" data-toggle="tooltip" title="" data-original-title="Удалить" style="background-color: red; color: #fff; border: none; border-radius: 10%; padding: 10px;">
+                                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon"> 
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                                             </svg>
+                                          </button>
+                                       </a>
+                                    </td> 
+                                 </tr>
+                                 <%  }  %> 
+                                  
+                              </tbody>
+                           </table>  
+                           <a href="/" class="btn btn-primary">Вернуться на главную страницу</a>
+                        </div>
+                         
+                     </form>
+
+                      
+
+                  </div>
+               </div>
+            </div>
+            <% } %>  
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)/ -->
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head>
+      <%- include('includes/head')%> 
+   </head>
+
+
+   <body>
+      <%- include('includes/header')%>   
+      <div class="wrapper wrapper-shift">
+           
+         <div class="content-container" id="content-container-block">
+            <%- include('includes/menu')%>  
+
+             
+            <div id="common-home" class="container-fluid">
+               <div class="row">
+                  <div id="content" class="col-sm-12"> 
+
+                     <div class="row" style="padding-left: 20px;">
+                        <h2>Реальные комментарии взятые из нашей группы: <a href="https://vk.com/doremi.mebel"></a></h2>
+                     </div>
+                        
+                     <%
+
+                     for (let i=0; i < comments.length; i++ ) {
+                        let comment = comments[i];
+                        let linkNext = `<a href="https://vk.com/topic-30313045_38854309?post${comment.comment_id}" target="_blank">... Открыть комментарий в группе: ДоРеМи</a>`;
+
+                        if (comment.text.length > 250 ) comment.text = comment.text.substr(0, 250) + linkNext
+                        if (comment.text.length <= 250 ) comment.text += linkNext
+                     
+                     %>
+                     <div class="row comment-block">
+                        <div class="col-md-4 col-sm-4 col-xs-4 comment-block-photo">  
+                           <img class="img-responsive" src="<%- comment.photo %>" style="border-radius: 50%; width: 150px;">
+                           <a href="https://vk.com/id<%- comment.user_id %>" target="_blank" style="text-decoration: none; justify-content: center; display: flex; padding-top: 5px;"><%- comment.name %></a>
+                        </div>  
+
+                        <div class="col-md-8 col-sm-8 col-xs-8 comment-block-text" style="padding-bottom: 30px;">  
+                           <p class="comment-link"><%- comment.text %> </p>
+                        </div>   
+                     </div>
+                     <% } %>
+                  </div>   
+
+               </div> 
+            </div>
+               
+                
+            <div class="height-indent" style="margin-top: 100px; "></div>
+            <%- include('includes/insert')%>     
+          
+         </div>
+      </div>
+      <%- include('includes/footer')%>
+   </body>
+</html>

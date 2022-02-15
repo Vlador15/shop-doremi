@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+       
+      <!-- Menu !--> 
+      <%- include('includes/header')%> 
+      <div class="wrapper wrapper-shift">   
+         <div class="content-container">
+         <%- include('includes/menu')%>   
+            <div id="account-register" class="container-fluid">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/my-account">Личный Кабинет</a></li>
+                  <li><a href="/create-account">Регистрация</a></li>
+               </ul>
+               <% 
+                  if ( err != false ) {
+                  %> 
+               <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> <%- err %> </div>
+               <%
+                  }
+                  %>
+               <div class="row">
+                  <div id="content" class="col-sm-9">
+                     <h1>Регистрация</h1>
+                     <p>Если Вы уже зарегистрированы, перейдите на страницу <a href="/login">авторизации</a>.</p>
+                     <p style="color: red;">Пожалуйста, запомните свой пароль. Восстановить его будет нельзя!</p>
+                     <form action="/create-account" method="post" enctype="multipart/form-data" class="form-horizontal js-form-validate">
+                        <fieldset id="account">
+                           <legend>Основные данные</legend>
+                         
+                           <div class="form-group required">
+                              <label class="col-sm-2 control-label" for="input-name">ФИО</label>
+                              <div class="col-sm-10 some-form__line">
+                                 <input type="text" name="name" value="" placeholder="ФИО" id="input-name" class="form-control" data-validate style="margin-bottom: 0px; border-radius: .8rem"> 
+                                 <span class="some-form__hint">ФИО должно быть от 5 до 42 символов</span> 
+                              </div>
+                           </div>
+                           <!-- 
+                           <div class="form-group required">
+                              <label class="col-sm-2 control-label" for="input-lastname">Фамилия</label>
+                              <div class="col-sm-10 some-form__line">
+                                 <input type="text" name="lastname" value="" placeholder="Фамилия" id="input-lastname" class="form-control" data-validate> 
+                                 <span class="some-form__hint">Фамилия должна быть от 2 до 32 символов</span> 
+                              </div>
+                           </div>  
+                           <div class="form-group required">
+                              <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
+                              <div class="col-sm-10 some-form__line">
+                                 <input type="email" name="email" value="" placeholder="E-Mail" id="input-email" class="form-control" data-validate>
+                                 <span class="some-form__hint">E-Mail введен неправильно</span> 
+                              </div>
+                           </div>!-->
+                           <div class="form-group required">
+                              <label class="col-sm-2 control-label" for="input-telephone">Телефон</label>
+                              <div class="col-sm-10 some-form__line"> 
+                                 <input type="tel" name="phone" value="" placeholder="Телефон" id="input-telephone" class="form-control" data-validate>
+                                 <span class="some-form__hint">Телефон должен состоять из 11 символов</span> 
+                              </div>
+                           </div>
+                        </fieldset>
+                        <fieldset>
+                           <legend>Ваш пароль</legend>
+                           <div class="form-group required">
+                              <label class="col-sm-2 control-label" for="input-password">Пароль</label>
+                              <div class="col-sm-10 some-form__line">
+                                 <input type="password" name="password" value="" placeholder="Пароль" id="input-password" class="form-control" data-validate> 
+                                 <span class="some-form__hint">В пароле должно быть от 4 до 20 символов!</span> 
+                              </div>
+                           </div>
+                            <!-- 
+                           <div class="form-group required">
+                              <label class="col-sm-2 control-label" for="input-confirm">Подтверждение пароля</label>
+                              <div class="col-sm-10 some-form__line">
+                                 <input type="password" name="password2" value="" placeholder="Подтверждение пароля" id="input-confirm" class="form-control" data-validate> 
+                                 <span class="some-form__hint">Пароли не совпадают</span> 
+                              </div>
+                           </div> !-->
+                        </fieldset>
+                        <!--  
+                        <fieldset>
+                           <legend>Рассылка новостей</legend>
+                           <div class="form-group">
+                              <label class="col-sm-2 control-label">Подписка на новости</label>
+                              <div class="col-sm-10">              
+                                 <label class="radio-inline">
+                                 <input type="radio" name="mailing" value="1" data-validate>
+                                 Да
+                                 </label>
+                                 <label class="radio-inline">
+                                 <input type="radio" name="mailing" value="0" checked="checked" data-validate>
+                                 Нет
+                                 </label>
+                              </div>
+                           </div>
+                        </fieldset>
+                        <div class="checkbox-inline some-form__line">
+                           <input type="checkbox" name="agreement" value="1">
+                           Я прочитал 
+                           <a href="/agree" class="agree">
+                           <b>Политика Безопасности</b>
+                           </a> 
+                           и согласен с 
+                           <br> 
+                           условиями безопасности и обработки персональных данных
+                           <span class="some-form__hint" style="margin-top: 3px;">Вы должны согласиться</span> 
+                        </div> !-->
+                        <div class="buttons">                   
+                           <input type="submit" value="Продолжить" class="btn btn-primary"> 
+                        </div> 
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.js"></script>
+            <script src="./scripts/create-acc.js"></script> 
+             
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

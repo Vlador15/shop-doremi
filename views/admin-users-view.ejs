@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      <!-- Menu !--> 
+      <%- include('includes/header')%> 
+      <div class="wrapper wrapper-shift">
+            
+
+         <div class="content-container">
+            <%- include('includes/menu')%>   
+            <div id="checkout-cart" class="container-fluid">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/admin/users">Клиенты</a></li>
+                  <li><a href="/admin/users">Просмотр клиента</a></li>
+               </ul>
+              
+               <% if (userView == undefined) { %>
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <h1>Клиент не найден</h1>
+                     <p>Обратитесь к разработчику!</p>
+                     <div class="buttons clearfix">
+                        <div class="pull-right"><a href="/admin/users" class="btn btn-primary">Назад</a></div>
+                     </div>
+                  </div>
+               </div>
+               <% } else { %>
+               <div class="row">
+                  <div id="content" class="col-sm-7"> 
+                     <h1 class="text-center">Карточка клиента</h1> 
+                     <table class="table table-sm table-striped table-bordered" id="admin-table-users-view" >  
+                        <tbody>
+                           <form method="post" action="/admin/users/update" novalidate>
+                              <tr> 
+                                 <td class="text-left">ID</td> 
+                                 <td class="text-left"><input name="id" value="<%- userView.id %>" readonly></td> 
+                              </tr> 
+                              <tr> 
+                                 <td class="text-left">ФИО</td>  
+                                 <td class="text-left"><input name="name" value="<%- userView.name %>"></td> 
+                              </tr>   
+                              <tr> <!--
+                                 <td class="text-left">Email</td>  
+                                 <td class="text-left"><input name="email" value="<%- userView.email %>"></td> 
+                              </tr> !-->   
+                              <tr> 
+                                 <td class="text-left">Пароль</td>  
+                                 <td class="text-left"><input name="password" value="<%- userView.password %>"></td> 
+                              </tr>  
+                              <tr> 
+                                 <td class="text-left">Телефон</td>  
+                                 <td class="text-left"><input name="phone" value="<%- userView.phone %>"></td>
+                              </tr>  
+                              <tr> 
+                                 <td class="text-left">Баллов</td>  
+                                 <td class="text-left"><input name="points" value="<%- userView.points %>"></td>
+                              </tr> 
+                              <tr> 
+                                 <td class="text-left">Скидка в %</td>  
+                                 <td class="text-left"><input name="discount" value="<%- userView.discount %>"></td>
+                              </tr>  
+                              <tr> 
+                                 <td class="text-left">Зарегистрирован</td>  
+                                 <td class="text-left"><input name="regDate" value="<%- userView.regDateText %>" style="width: 100%;" readonly></td>
+                              </tr>   
+                              <tr> 
+                                 <td class="text-left">Реф. ссылка</td>  
+                                 <td class="text-left"><input name="referalUrl" value="<%- userView.referalUrl %>"></td> 
+                              </tr>   
+                              <tr> 
+                                 <td class="text-left">Рефералов</td>  
+                                 <td class="text-left"><input name="referals-length" value="<%- userView.referals.length %>" readonly></td>
+                              </tr>  
+
+                              <tr>    
+                                 <td class="text-left">Статус</td>
+                                 
+                                 <td class="text-left"> 
+                                    <% 
+                                       let statuses = ['Пользователь', 'Модератор', 'Администратор', 'Разработчик'];
+                                       let status_style = ['background: #ececec; color: #000;', 'background: #98eff3; color: #000;', 'background: #ec2424; color: #fff;', 'background: #8a1ade; color: #fff;']; 
+                                    %>
+
+                                    <select name="admin" id="update-order-form" style="<%- status_style[userView.admin] %>"> 
+                                       <option value="<%- userView.admin %>"> <%- statuses[userView.admin] %> </option>
+                                       <option value="0" style="<%- status_style[0] %>"> Пользователь </option>
+                                       <option value="1" style="<%- status_style[1] %>"> Модератор </option>
+                                       <option value="2" style="<%- status_style[2] %>"> Администратор </option>
+                                       <option value="3" style="<%- status_style[3] %>"> Разработчик </option>
+                                    </select>   
+                                 </td>    
+                              </tr> 
+ 
+                              <tr style="margin-top: 40px;">
+                                 <td>
+                                    <a href="admin/users/delete/<%- userView.id %>" class="btn btn-danger" style="color: #fff; width: 100px; height: 30px;">
+                                       <b>Удалить</b>
+                                    </a> 
+                                 </td>
+                                 <td> 
+                                    <button type="submit" class="btn btn-primary" style="width: 100px; height: 30px;">Сохранить</button>
+                                 </td> 
+                              </tr>
+                           </form>   
+                        </tbody> 
+                     </table> 
+                  </div>
+
+                  <div id="content" class="col-sm-5">  
+
+                     <div class="panel">
+                        <h3 class="text-center pt-3 mb-5">Выбор действия</h3> 
+                        <div class="panel-body">   
+                            <ul class="nav nav-tabs p-4">  
+                                <li class="nav-item panel-items active">
+                                    <a class="nav-link active" data-toggle="tab" href="#add"><b>Начислить баллы</b></a> 
+                                </li>   
+                                <li class="nav-item ml-1 panel-items">
+                                    <a class="nav-link" data-toggle="tab" href="#remove" ><b>Снять баллы</b></a>
+                                </li>     
+                            </ul> 
+                        </div> 
+                        <hr>
+                    </div>  
+
+                     <!-- Сами вкладки -->  
+                     <ul class="nav nav-tabs"></ul>
+                        <!-- Блоки с контентом -->  
+                        <div class="tab-content" style="padding: 0px;">
+                          <!-- Первый блок (он отображается по умолчанию, т.к. имеет классы show и active) -->  
+                           <div class="tab-pane fade show active in" id="add"> 
+                              <div class="row">
+
+                                 <h3 class="text-center">Выдача баллов</h3>
+                                 <hr> 
+                                 <form method="post" action="/admin/points/update" novalidate> 
+                                    <input name="id" value="<%- userView.id %>" style="display: none;"> 
+                                    <table class="table table-sm table-striped table-bordered" id="admin-table-users-view" style="width: 100%;">  
+                                       <tbody>  
+                                          <tr> 
+                                             <td class="text-left" style="background: #dbe4ff9e;">Сумма заказа</td> 
+                                             <td class="text-left" ><input name="summa_order" id="summa_order_add" placeholder="0"></td> 
+                                          </tr> 
+                                          <tr> 
+                                             <td class="text-left">Будет начисленно</td> 
+                                             <td class="text-left"><input id="total-sum" placeholder="0"></td> 
+                                          </tr>   
+                                          <tr> 
+                                             <td class="text-left">Курс</td> 
+                                             <td class="text-left">1% от заказа</td> 
+                                          </tr>  
+                                          <tr> 
+                                             <td class="text-left"></td> 
+                                             <td class="text-center">
+                                                <button type="submit" class="btn btn-primary" style="width: 200px; height: 30px;">Выдать баллы</button>
+                                             </td> 
+                                          </tr>  
+                                       </tbody>  
+                                    </table>  
+                                 </form> 
+                              </div>
+                           </div>
+
+                           <div class="tab-pane fade" id="remove">
+                              <div class="row">
+
+                                 <h3 class="text-center">Снять баллы</h3>
+                                 <b style="color: red;">Для снятия доступно: <%- userView.points %> баллов</b>
+                                 <hr> 
+                                 <form method="post" action="/admin/points/delete" novalidate> 
+                                    <input name="id" value="<%- userView.id %>" style="display: none;"> 
+                                    <table class="table table-sm table-striped table-bordered" id="admin-table-users-view" style="width: 100%;">  
+                                       <tbody> 
+                                          <tr> 
+                                             <td class="text-left" style="background: #dbe4ff9e;">Сумма заказа</td> 
+                                             <td class="text-left" ><input name="summa_order" id="summa_order_remove" placeholder="0"></td> 
+                                          </tr>  
+                                          <tr> 
+                                             <td class="text-left">Снимаемые баллы</td> 
+                                             <td class="text-left"><input name="remove_points" placeholder="0"></td> <!-- id="total-sum" !-->
+                                          </tr> 
+                                          <tr> 
+                                             <td class="text-left">Максимальная скидка</td> 
+                                             <td class="text-left"><p id="max_discount"></p></td> 
+                                          </tr> 
+                                          <tr> 
+                                             <td class="text-left">Скидка</td> 
+                                             <td class="text-left"><p id="discount_amount"></p></td> 
+                                          </tr> 
+                                          <tr> 
+                                             <td class="text-left">К оплате</td> 
+                                             <td class="text-left"><p id="for_payment"></p></td> 
+                                          </tr>   
+                                          <tr> 
+                                             <td class="text-left"></td> 
+                                             <td class="text-center">
+                                                <button type="submit" class="btn btn-primary" style="width: 200px; height: 30px;">Снять баллы</button>
+                                             </td> 
+                                          </tr>  
+                                       </tbody>  
+                                    </table>  
+                                 </form>  
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+
+
+                  </div>
+
+
+               </div>
+            </div>
+            <% } %>  
+         </div>
+      </div>
+      <%- include('includes/footer')%>   
+   </body> 
+</html>

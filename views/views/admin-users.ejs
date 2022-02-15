@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      <!-- Menu !--> 
+      <%- include('includes/header')%>
+      <div class="wrapper wrapper-shift">    
+
+         <div class="content-container">
+            <%- include('includes/menu')%>  
+            <div id="checkout-cart" class="container-fluid">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/admin/orders">Все клиенты</a></li>
+               </ul>
+         
+               <script src="./scripts/admin-users.js"></script>   
+
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                
+                     <h1>Список клиентов</h1>
+                    
+                     <div class="table-responsive">
+                     <script type="text/javascript">searchUsers()</script>
+
+                     <input type="text" id="search-form" onkeyup="search_name()" placeholder="🔎 Введите имя или телефон" style="border-radius: 10px; margin-top: 5px">  
+
+                        <table class="table table-sm table-bordered js-sort-table" id="admin-table-users" style="overflow: scroll;">
+                           <thead style="background-color: #474747; color: #fff;">
+                              <tr>
+                                 <th class="text-left" style="width: 15%;">ФИО</th> 
+                                 <th class="text-left" style="width: 7%;">ID</th> 
+                                 <!--<th class="text-left" style="width: 10%;">Email</th>!-->
+                                 <!--<th class="text-left" style="width: 10%;">Пароль</th>!-->
+                                 <th class="text-left" style="width: 10%;">Телефон</th> 
+                                 <th class="text-left" style="width: 10%;">Баллов</th> 
+                                 <th class="text-left" style="width: 7%;">Регистрация</th> 
+                                 <th class="text-left" style="width: 10%;">Реф. ссылка</th> 
+                                 <th class="text-left" style="width: 10%;">Рефералов</th> 
+                                 <th class="text-center" style="width: 10%;">Статус</th> 
+                                 <th class="text-center">Удалить</th>
+                              </tr>
+                           </thead>
+                           <tbody style="word-break: break-all;"> 
+                               
+                           </tbody>
+                        </table>  
+
+                        <script type="text/javascript" src="/scripts/sort-table.js"></script>
+                        <script>
+                           function search_name() {
+                             // Declare variables 
+                             var input, filter, table, tr, td, i;
+                             input = document.getElementById("search-form");
+                             filter = input.value.toUpperCase();
+                             table = document.getElementById("admin-table-users");
+                             tr = table.getElementsByTagName("tr");
+
+                             // Loop through all table rows, and hide those who don't match the search query
+                             for (i = 0; i < tr.length; i++) {
+                               td_name = tr[i].getElementsByTagName("td")[0]; 
+                               td_phone = tr[i].getElementsByTagName("td")[2]; 
+                               
+                               if (td_name || td_phone) {
+                                 if (
+                                    td_name.innerHTML.toUpperCase().indexOf(filter) > -1 || 
+                                    td_phone.innerHTML.toUpperCase().indexOf(filter) > -1
+                                    ) 
+                                 {
+                                   tr[i].style.display = "";
+                                 } else {
+                                   tr[i].style.display = "none";
+                                 }
+                               }
+                             }
+                           }    
+                        </script>
+                     </div>   
+                  </div>
+               </div>
+            </div> 
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

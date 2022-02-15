@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      
+      <!-- Menu !--> 
+      <%- include('includes/header')%>
+      <div class="wrapper wrapper-shift"> 
+          
+         <div class="content-container"> 
+            <%- include('includes/menu')%>    
+    
+            <% 
+              const statuses = {
+                "0": "Пользователь",
+                "1": "Модератор",
+                "2": "Администратор",
+                "3": "Разработчик"
+              }
+            %>
+ 
+            <div id="content" class="col-sm-7" style="margin: 50px 0 200px 0; min-height: 300px;"> 
+              <div class="container-fluid"> 
+                <h3 class="text-center">Ваш профиль</h3>
+                <table class="table table-bordered" id="table-my-account">  
+                  <tbody>
+                    <tr> 
+                       <td class="text-left">Имя</td> 
+                       <td class="text-left"><%- user.name %></td> 
+                    </tr> <!--
+                    <tr> 
+                       <td class="text-left">Email</td> 
+                       <td class="text-left"><%- user.email %></td> 
+                    </tr> !-->
+                    <tr> 
+                       <td class="text-left">Телефон</td> 
+                       <td class="text-left"><%- user.phone %></td> 
+                    </tr>  
+                    <!-- <tr> 
+                       <td class="text-left">Баллов</td> 
+                       <td class="text-left"><%- user.points %></td> 
+                    </tr> 
+                    <tr> 
+                       <td class="text-left">Скидка</td> 
+                       <td class="text-left"><%- user.discount %>%</td> 
+                    </tr>   -->
+                    <tr> 
+                       <td class="text-left">Зарегистрировались</td> 
+                       <td class="text-left"><%- user.regDateText %></td> 
+                    </tr>  
+                    <!-- <tr> 
+                       <td class="text-left">Реферальная ссылка</td> 
+                       <td class="text-left"><a href="<%- user.referalUrl %>" target="_blank"><%- user.referalUrl %></a></td> 
+                    </tr>  
+                    <tr> 
+                       <td class="text-left">Привели друзей:</td> 
+                       <td class="text-left"><%- user.referals.length %></td> 
+                    </tr>  -->
+
+                    <tr> 
+                       <td class="text-left">Статус:</td> 
+                       <td class="text-left"><%- statuses[user.admin] %></td> 
+                    </tr>  
+
+                    <!-- <tr> 
+                       <td class="text-left">Вас пригласил:</td> 
+                       <td class="text-left"><%- referalName %></td> 
+                    </tr>  -->
+
+                  </tbody>
+                </table>    
+              </div>
+            </div>
+
+
+            <!--  
+            <div id="content" class="col-sm-5" style="margin-top: 50px; min-height: 300px;"> 
+              <h3 class="text-center">Введите бонусный купон</h3>
+              <table class="table table-bordered" id="table-my-account">  
+                <tbody> 
+                  <tr>  
+                      <td class="text-left" style="background: #dbe4ff9e;">
+                        <input name="promocode" placeholder="000000" style="width: 100%;">
+                        <span style="display: none; margin-top: 10px;" id="promocode-text"></span>
+                      </td>  
+                  </tr>  
+                </tbody>
+              </table>  
+
+              <hr>
+
+              <h3 class="text-center">Последние 20 приведенных друзей</h3>
+              <div style="max-height: 150px; overflow: auto;">
+                <table class="table table-bordered" id="table-my-account">  
+                  <tbody>
+                    <% for (i=0; i < 20; i++) { %>
+                      <% if (referals[i]) { %>
+                        <tr> 
+                           <td class="text-left" style="background: #dbe4ff9e;">Вы привели <%- referals[i].name %> и получили 100 баллов</td>  
+                        </tr>
+                      <% } %> 
+                    <% } %>
+
+                  </tbody>
+                </table>  
+              </div>
+               
+            </div>
+
+              
+            <div id="content" class="col-sm-7"> 
+
+              <h3 class="text-center">Правила</h3>
+              <div>
+                <table class="table table-bordered" id="table-my-account">  
+                  <tbody>
+
+
+                    <tr> 
+                      <td class="text-left" colspan="2" style="background: #dbe4ff9e;">
+                        <p>
+                          Бонусы – это ваша скидка на будущую покупку. <br> 
+                          Бонусами можно оплатить до 10% стоимости товара
+                        </p>
+                      </td>  
+                    </tr>
+
+                    <tr> 
+                      <td class="text-left" colspan="2" style="background: #dbe4ff9e;">
+                        <p>
+                          Какие бывают бонусы? <br> 
+                          Есть два вида бонусов: <b>кэшбэк бонусы и скидочные бонусы</b> 
+                        </p>
+                      </td>  
+                    </tr> 
+
+                    <tr> 
+                      <td class="text-left" colspan="2" style="background: #dbe4ff9e;">
+                        <p>
+                          Сколько «стоит» Бонус? <br> 
+                          1 бонус равен 1 рублю
+                        </p>
+                      </td>  
+                    </tr> 
+
+                    <tr> 
+                      <td class="text-center" style="background: #fff;" colspan="2"></td>  
+                    </tr> 
+
+                    <tr> 
+                      <td class="text-center" style="background: #ff3f3f9e;" colspan="2">
+                        <h4>Как получить скидочные баллы?</h4>
+                      </td>  
+                    </tr> 
+                    <tr> 
+                      <td class="text-left" style="background: #dbe4ff9e; width: 20%;">
+                        <p>1. Кэшбэк </p>
+                      </td>  
+                      <td class="text-left" style="background: #dbe4ff9e;">
+                        <p>
+                          С каждой покупки, на сумму более 10 000 рублей, Вы получаете на свой счет 1% от стоимости заказа в виде баллов. <br>
+                          Где 1 рубль= 1 баллу. <br>
+                          Баллы зачисляются на счет в течение 15 дней с момента покупки. <br>
+                          При покупке или накопления, свыше 100 тысяч рублей, вам начисляются 4% от стоимости покупки. 
+                        </p>
+                      </td>  
+                    </tr> 
+                    <tr> 
+                      <td class="text-left" style="background: #dbe4ff9e; width: 20%;">
+                        <p>2. Реферальная система </p>
+                      </td>  
+                      <td class="text-left" style="background: #dbe4ff9e;">
+                        <p>
+                          Участвуйте в программе "Пригласи друга". <br>
+                          Отправьте ссылку: <a href="<%- user.referalUrl %>" target="_blank"><%- user.referalUrl %></a><br>
+                          своему другу и попросите зарегистрироваться на сайте. <br>
+                          <b>После регистрации Ваш друг получит приветственные 1000 баллов на счет.</b> 
+                        </p>
+                      </td>  
+                    </tr> 
+                    <tr> 
+                      <td class="text-left" style="background: #dbe4ff9e; width: 20%;">
+                        <p>3. Бонусные купоны </p>
+                      </td>  
+                      <td class="text-left" style="background: #dbe4ff9e;">
+                        <p> 
+                          Участвуйте в конкурсе активности в нашей группе ВК: <a href="https://vk.com/doremi.mebel" target="_blank">https://vk.com/doremi.mebel</a> <br>
+                          Правила конкурса активности: <a href="https://vk.com/@doremi.mebel-konkurs-aktivnosti" target="_blank">https://vk.com/@doremi.mebel-konkurs-aktivnosti</a> <br>
+                          Ставьте лайки на всех постах, пишите комментарии и играйте в мини-игры, чтобы зарабатывать игровые баллы.
+                          После окончания конкурса Вы получите купон, который сможете активировать в личном кабинете на сайте и получить бонусные баллы.
+                        </p>
+                      </td>  
+                    </tr> 
+
+                    <tr> 
+                      <td class="text-center" style="background: #fff;" colspan="2"></td>  
+                    </tr> 
+                    <tr> 
+                      <td class="text-center" style="background: #ff3f3f9e;" colspan="2">
+                        <h4>Что можно сделать со скидочными баллами?</h4>
+                      </td>  
+                    </tr>  
+                    <tr> 
+                      <td class="text-left" style="background: #dbe4ff9e; width: 20%;">
+                        <p>1. Оплатить часть покупки </p>
+                      </td>  
+                      <td class="text-left" style="background: #dbe4ff9e;">
+                        <p>Вы сможете оплатить скидочными баллами от 5% до 10% от стоимости заказа <br>
+                          Для этого Вам нужно, в момент оплаты, продиктовать свой номер телефона продавцу. <br>
+                          После этого продавец сделает Вам скидку в 5-10% (в профиле указана Ваша максимальная скидка) и снимет скидочные баллы.
+                        </p>
+                      </td>  
+                    </tr> 
+
+                  </tbody>
+                </table>
+              </div> 
+            </div>  
+
+            <div id="content" class="col-sm-5" style="min-height: 300px;"> 
+  
+              <h3 class="text-center">Последние действия: начисления/снятие баллов</h3>
+              <div style="max-height: 250px; overflow: auto;">
+                <table class="table table-bordered" id="table-my-account">  
+                  <tbody>
+                    <% for (i=0; i < logs.length; i++) { %>
+                      <% if (logs[i]) { %>
+                        <tr> 
+                           <td class="text-left" style="background: #dbe4ff9e;">
+                            <%- logs[i].date %> | <%- logs[i].text %>
+                          </td>  
+                        </tr>
+                      <% } %> 
+                    <% } %>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>   -->  
+        
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

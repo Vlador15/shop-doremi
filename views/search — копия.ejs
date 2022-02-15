@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)/ -->
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head>
+      <%- include('includes/head')%> 
+   </head>
+
+
+   <body>
+      <%- include('includes/header')%> 
+      <div class="wrapper wrapper-shift"> 
+         
+         <div class="content-container" id="content-container-block">
+            <%- include('includes/menu')%> 
+
+             
+            <div id="common-home" class="container-fluid">
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                
+
+                     <ul class="breadcrumb" style="margin-bottom: 50px;">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/search">Поиск</a></li>
+                     </ul>
+     
+
+                     <div class="row no-gutters" id="products">
+                        <%   
+                        for (i = 0; i < products.length; i++) { 
+                           var product = products[i]; 
+                              %> 
+                           <div class="product-layout product-list col-lg-3 col-md-4 col-sm-4 col-xs-4" style="padding-right: 5px; padding-left: 5px;">
+                              <div class="product-thumb">
+                                 <div class="image">
+                                    <a href="/catalog/<%- product.link %>/<%- product.id %>">
+                                    <img src="<%- product.thumb_photo %>" alt="<%- product.title %>" title="<%- product.title %>" class="img-responsive" style="height: 100%;"/>
+                                    </a>   
+                                 </div>
+                                 <div class="caption">
+                                    <div class="price">
+                                       <span class="price-main"><%-product.price_text%></span> 
+                                    </div>
+                                    <a href="/catalog/<%- product.link %>/<%- product.id %>" class="product-name"><%-product.title%></a>             
+                                    <div class="button-group__flex"> 
+                                       <div class="button-group__btn" style="text-align: center; ">
+                                          <button id="btn-cart" type="button" class="btn btn-danger btn-lg" title="Купить" onclick='cart.add(<%- JSON.stringify(product.link) %>, <%- JSON.stringify(product.id) %>);'>
+                                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                                <circle cx="9" cy="21" r="1"></circle>
+                                                <circle cx="20" cy="21" r="1"></circle>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                             </svg>
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <% } %>
+                        </div>
+                     </div>  
+                      
+
+                  </div> 
+               </div>
+             </div>
+                
+            <script src="./scripts/search.js"></script> 
+
+            <div class="height-indent" style="margin-top: 100px;"></div>
+            <%- include('includes/insert')%>     
+         </div>
+      </div>    
+      <%- include('includes/footer')%>  
+   </body>
+</html>

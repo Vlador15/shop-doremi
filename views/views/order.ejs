@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      <!-- Menu !--> 
+      <%- include('includes/header')%>
+      <div class="wrapper wrapper-shift">
+             
+         <div class="content-container">
+            <%- include('includes/menu')%>  
+            <div id="checkout-cart" class="container-fluid">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/order">Оформление заказа</a></li>
+               </ul>
+               <% if (!products.length) { %>
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <h1>Корзина покупок</h1>
+                     <p>Корзина пуста!</p>
+                     <div class="buttons clearfix">
+                        <div class="pull-right"><a href="/catalog" class="btn btn-primary">Продолжить</a></div>
+                     </div>
+                  </div>
+               </div>
+               <% } else { %>
+ 
+               <div class="row">
+
+                  <%  
+                     let totalPrice = 0; 
+                     for (i = 0; i < products.length; i++) { 
+                       let product = products[i].product;  
+                       totalPrice += product.price * products[i].count;
+                     }
+
+                     function spaces(string) {
+                       if (typeof string !== "string") string = string.toString();
+                       return string.split("").reverse().join("").match(/[0-9]{1,3}/g).join(" ").split("").reverse().join("") + 'руб.';
+                     };
+                  %>
+
+                  <div class="col-25" style="margin-bottom: 30px; margin-top: 50px;">
+                   <div class="container">  
+                      
+                     <h3><i class="fa fa-credit-card" aria-hidden="true"></i> Итоговая сумма заказа: 
+                        <span class="price" style="color:black;">
+                           <b><%- spaces(totalPrice) %></b>
+                        </span>
+                     </h3>
+                   </div>
+                  </div>
+
+
+                 <div class="col-75">
+                   <div class="container">
+                     <form action="/order" method="post" enctype="multipart/form-data" class="js-form-validate">
+
+                        <fieldset id="data">
+                           <legend>Контактные данные</legend>
+                           <div class="form-group required">
+                              <label class="control-label " for="input-firstname"><i class="fa fa-user"></i> Ф.И.О</label>
+                              <div class="some-form__line form-order">
+                                 <input type="text" name="name" value="" placeholder="Иванов Иван Иванович" id="input-firstname" class="form-control" data-validate>
+                                 <span class="some-form__hint">Ф.И.О должно быть от 5 до 50 символов</span> 
+                              </div>
+                           </div> 
+                           <div class="form-group required">
+                              <label class="control-label" for="input-email"><i class="fa fa-envelope"></i><b> Email </b></label>
+                              <div class="some-form__line form-order">
+                                 <input type="email" name="email" value="" placeholder="E-Mail" id="input-email" class="form-control" data-validate>
+                                 <span class="some-form__hint">E-Mail введен неправильно</span> 
+                              </div>
+                           </div>
+                           <div class="form-group required">
+                              <label class="control-label" for="input-telephone"><i class="fa fa-envelope"></i><b> Телефон </b></label>
+                              <div class="some-form__line form-order"> 
+                                 <input type="tel" name="phone" value="" placeholder="Телефон" id="input-telephone" class="form-control" data-validate>
+                                 <span class="some-form__hint">Телефон должен состоять из 11 символов</span> 
+                              </div>
+                           </div>
+                           <div class="form-group required">
+                              <label class="control-label" for="input-telephone"><i class="fa fa-institution"></i><b> Город </b></label>
+                              <div class="some-form__line"> 
+                                 <input type="city" name="city" value="" placeholder="Москва" id="input-telephone" class="form-control" data-validate>
+                                 <span class="some-form__hint">Город должен быть от 2 до 50 символов</span> 
+                              </div>
+                           </div>
+                           <div class="form-group required">
+                              <label class="control-label" for="input-lastname"><i class="fa fa-address-card-o"></i><b> Адрес доставки </b></label>
+                              <div class="some-form__line form-order">
+                                 <input type="text" name="address" value="" placeholder="Бабаевская улица, дом-10, кв-2" id="input-lastname" class="form-control" data-validate> 
+                                 <span class="some-form__hint">Адрес должен быть от 3 до 70 символов</span> 
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label class="control-label" for="input-telephone"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><b> Ваши пожелания к заказу, уточните размеры или цвет </b></label>
+                              <textarea rows="4" style="width: 100%;" name="comment" placeholder='Ваши пожелания к заказу, уточните размеры или цвет'></textarea>
+                           </div>
+
+                           <div class="form-group" style="margin-top: 20px;">
+                              <label class="control-label" for="input-telephone"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><b> Укажите способ доставки: </b></label>
+
+                              <div class="form-group required radio-order">  
+                                 <div class="col-sm-12">  
+                                    <input type="radio" name="delivery" value="1" checked> <b> Сами заберем - бесплатно </b></input>  
+                                 </div>
+
+                                 <div class="col-sm-12"> 
+                                    <input type="radio" name="delivery" value="2"><b> Доставка заказа до 10 тысяч рублей по Лениногорску - 350 руб. </b></input>  
+                                 </div>
+
+                                 <div class="col-sm-12"> 
+                                    <input type="radio" name="delivery" value="3"><b> Доставка до квартиры по Лениногорску от 10 тысяч рублей - бесплатно </b></input> 
+                                 </div>      
+
+                                 <div class="col-sm-12"> 
+                                    <input type="radio" name="delivery" value="4"> <b> Мы с другого города - рассчитайте нам доставку </b></input>  
+                                 </div> 
+                              </div>
+                           </div>
+                        </fieldset>
+                           
+
+                        <div class="row" style="  padding: 16px;"> 
+                           <table class="table table-bordered" id="table-order"> 
+                              <tbody>
+                                 <tr style="font-size: 13px;">
+                                    <td>
+                                       ✔ ЛЕНИНОГОРСК <br>
+                                       🚚 Доставка БЕСПЛАТНО*<br>
+                                       🛄 Подъем БЕСПЛАТНО* <br>
+                                       *При заказе свыше 10 000 рублей. <br>
+                                       до 10 000 рублей доставка по городу 350 руб. <br>
+                                       * выше 5 этажа подъем 200 руб. этаж <br>
+                                       Сборка 10% от стоимости 
+                                    </td>
+                                  
+                                    <td>
+                                       ✔ БУГУЛЬМА <br>
+                                       Доставка 500 руб. при покупке от 50 тысяч. <br>
+                                       До 50 тысяч, Доставка 1000 руб. <br>
+                                       Подъем 200 руб. этаж. <br>
+                                       Доставка БЕСПЛАТНО от 80 тысяч 
+                                  
+                                    <td>
+                                       ✔АЛЬМЕТЬЕВСК <br>
+                                       ✔АЗНАКАЕВО <br>
+                                       ✔АКТЮБА <br>
+                                       Доставка 500 руб. от 60 тысяч<br> 
+                                       До 60 тысяч доставка 2 000 руб. <br>
+                                       Подъем 200 руб. этаж. <br>
+                                       Доставка БЕСПЛАТНО от 90 тысячи
+                                    </td>
+
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+   
+                       </div>
+
+                       <input type="submit" value="Продолжить" class="btn-order">
+                     </form>
+                   </div>
+                 </div>
+
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.js"></script>
+               <script src="./scripts/order.js"></script> 
+                  
+               </div>
+            <% } %> 
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head>
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+
+      <!-- Menu !--> 
+      <%- include('includes/header')%>   
+      <div class="wrapper wrapper-shift">
+
+         <div class="content-container">
+            <%- include('includes/menu')%> 
+             
+
+            <div id="product-product" class="container-fluid">
+
+                 
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/catalog/<%- link %>"><%- product.name %></a></li>
+                  <li><a href="/catalog/<%- link %>/<%- product.id %>"><%- product.title %></a></li>
+               </ul>
+               <h1><%- product.title %></h1>
+
+               <div id="alert-msg" class="alert-msg" style="text-align: center;">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                 Для заказа достаточно оплатить аванс: 500 рублей
+               </div>
+               
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <div class="row">
+                        <div class="col-sm-6 col-md-7 col-lg-8 col-75">
+                           <ul class="thumbnails">
+                              <li class="image-main">
+                                 <div class="row"> 
+                                    <div class="swiper-viewport swiper-slideshow" >
+                                       <div id="slideshow0" class="swiper-container swiper-container-horizontal">
+                                          <div class="swiper-wrapper" style="transform: translate3d(-3819px, 0px, 0px); transition-duration: 0ms;">
+                                             <div class="swiper-slide text-center swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 1243px; margin-right: 30px;">
+                                                <img src="<%- product.thumb_photo %>" title="<%- product.title %>" alt="loft-banner" class="img-responsive">
+                                             </div>
+                                             <% for (i = 0; i < product.photos.length; i++) {  
+
+                                                if (product.photos[i].sizes) {
+                                                  if (product.photos[i].sizes.url) {
+                                                    let photo = product.photos[i].sizes.url;  %>
+                                                    <div class="swiper-slide text-center swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 1243px; margin-right: 30px;">
+                                                      <img src="<%- photo %>" title="<%- product.title %>" alt="loft-banner" class="img-responsive" style="max-height: 550px;">
+                                                    </div>
+                                                  <%
+                                                  }
+                                                }  
+                                              } %>
+                                          </div>
+                                          <div class="swiper-pagination slideshow0 swiper-pagination-clickable swiper-pagination-bullets">
+                                             <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                                             <span class="swiper-pagination-bullet"></span>
+                                          </div>
+                                          <div class="swiper-pager">
+                                             <div class="swiper-button-next">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.7 58.5">
+                                                   <path d="M30.7 29.3L1.4 0 0 1.4l28 28L0 57l1.4 1.5 29.3-29.2"></path>
+                                                </svg>
+                                             </div>
+                                             <div class="swiper-button-prev">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.7 58.5">
+                                                   <path d="M0 29.3L29.3 0l1.4 1.4-28 28 28 27.7-1.4 1.5L0 29.3"></path>
+                                                </svg>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div> 
+                                 </div>
+                                 <script> 
+                                    $('#slideshow0').swiper({
+                                        mode: 'horizontal',
+                                        slidesPerView: 1,
+                                        pagination: '.slideshow0',
+                                        paginationClickable: true,
+                                        nextButton: '.swiper-button-next',
+                                        prevButton: '.swiper-button-prev',
+                                        spaceBetween: 30,
+                                        autoplay: 5000,
+                                        autoplayDisableOnInteraction: true,
+                                        loop: true
+                                    });
+                                 </script>
+                              </li> 
+                           </ul>
+                           <ul class="nav nav-tabs">
+                              <li class="active"><a href="#tab-description" data-toggle="tab">Описание</a></li> 
+                           </ul>
+                           <div class="tab-content">
+                              <div class="tab-pane active" id="tab-description">
+                                 <% 
+                                    let links = [...product.description.matchAll(/https[\S]+/g)];
+                                    links.forEach((link) => {
+                                       product.description = product.description.replace(link[0], `<a href="${link}" target="_blank">${link}</a>`);
+                                    });
+                                 %>
+                                 <text style="font-size: 17px; width: 100%;  white-space: pre-wrap;"><%- product.description %></text> 
+                              </div>
+                               
+                           </div>
+                        </div>
+                        <%
+                           function spaces(string) {
+                             if (typeof string !== "string") string = string.toString();
+                             return string.split("").reverse().join("").match(/[0-9]{1,3}/g).join(" ").split("").reverse().join("") + ' руб.';
+                           };
+                        %>
+                        <div class="col-sm-6 col-md-5 col-lg-4 col-25">
+                           <div class="product-body"> 
+                              <div class="price product-price">
+                                 <div class="price-main"><%- spaces(product.price) %></div>  
+                              </div>
+                              
+                              <div id="product">
+                                 <div class="form-group">
+                                    <label class="control-label" for="input-quantity">Комментарий к заказу</label>
+                                    <textarea rows="4" name="comment" placeholder='Комментарий к заказу' style="width: 100%;"></textarea>
+                                    <br>
+                                    <label class="control-label" for="input-quantity">Кол-во</label>
+                                    <input type="text" name="quantity" value="1" size="2" id="input-quantity" class="form-control" onkeyup="this.value = this.value.replace(/[^\d]/g,'');">
+                                    <input type="hidden" name="product_id" value="107">
+                                    <br> 
+                                    <button id="button-cart" type="button" class="btn btn-primary btn-lg btn-block" title="Купить" onclick='cart.add(<%- JSON.stringify(link) %>, <%- JSON.stringify(product.id) %>);' > Купить 
+                                    </button> 
+                                    <div class="product-reward">
+                                       <span>Для заказа достаточно 500 рублей</span>
+                                       
+                                       <span class="reward-questions">?</span>
+                                       <div class="price-points dropdown-box">Аванс при заказе: 500 рублей </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <script type="text/javascript">
+               const el = document.getElementById('alert-msg');
+               el.scrollIntoView({behavior: "smooth"});
+            </script>
+
+            <div class="height-indent" style="margin-top: 100px;"></div>
+            <%- include('includes/insert')%>    
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head> 
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      
+      <!-- Menu !--> 
+      <%- include('includes/header')%>
+      <div class="wrapper wrapper-shift"> 
+          
+         <div class="content-container">  
+            <%- include('includes/menu')%>  
+ 
+            <div id="content" class="col-sm-12" style="margin-top: 50px; min-height: 300px;"> 
+              <div class="container-fluid"> 
+                <h3 class="text-center">Выбор задачи</h3>
+                <table class="table table-bordered">  
+                  <tbody>
+                    <tr> 
+                       <td class="text-center">
+                          <a href="admin/download-phone">Скачать номера телефонов в excel</a>
+                       </td>  
+                    </tr>   
+                  </tbody>
+                </table>    
+              </div>
+            </div>  
+        
+         </div>
+      </div>
+      <%- include('includes/footer')%> 
+   </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+   <!--<![endif]-->
+   <head>
+      <%- include('includes/head')%> 
+   </head>
+   <body>
+      <!-- Menu !--> 
+      <%- include('includes/header')%>   
+      <div class="wrapper wrapper-shift"> 
+
+         <div class="content-container">
+            <%- include('includes/menu')%>  
+            
+            <div id="checkout-cart" class="container-fluid">
+               <ul class="breadcrumb">
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/cart">Корзина покупок</a></li>
+               </ul>
+               <% if (!products.length) { %>
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <h1>Корзина покупок</h1>
+                     <p>Корзина пуста!</p>
+                     <div class="buttons clearfix">
+                        <div class="pull-right"><a href="/catalog" class="btn btn-primary">Продолжить</a></div>
+                     </div>
+                  </div>
+               </div>
+               <% } else { %>
+               <div class="row">
+                  <div id="content" class="col-sm-12">
+                     <form action="cart/update" method="post" enctype="multipart/form-data">
+                        <h1>Корзина покупок</h1>
+                        <div style="margin-bottom: 40px; margin-top: 40px; text-align: center;">
+                           <button type="submit" data-toggle="tooltip" title="" style="color: #000; background-color: #feee39; padding: 10px; border:none;" data-original-title="Сохранить"><strong>Сохранить изменения</strong></button>  
+                           <a href="/order" style="background-color: red; color: #fff; padding: 12px; margin-left: 20px;">Оформление заказа</a>
+                        </div>
+                        <div class="table-responsive">
+                           <table class="table table-bordered">
+                              <thead style="background-color: #474747; color: #fff;">
+                                 <tr>
+                                    <th class="text-center">Фотография</th>
+                                    <th class="text-left">Название</th>
+                                    <th class="text-left">Количество</th>
+                                    <th class="text-left">Пожелания</th>
+                                    <th class="text-right">Цена за шт.</th>
+                                    <th class="text-right">Всего</th>
+                                    <th class="text-center">Удалить</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <%  
+                                       let totalPrice = 0;
+                                       for (i = 0; i < products.length; i++) { 
+                                         let product = products[i].product;  
+                                         totalPrice += Number(product.price * products[i].count);
+
+                                          function spaces(string) {
+                                            if (typeof string !== "string") string = string.toString();
+                                            return string.split("").reverse().join("").match(/[0-9]{1,3}/g).join(" ").split("").reverse().join("") + ' руб.';
+                                          };
+                                       %>
+                                    <input type="text" name="product_id" value="<%- product.id %>" size="1" class="form-control" style='display: none;'>
+                                    <td class="text-center"> 
+                                       <a href="/catalog/<%- product.link %>/<%- product.id %>">
+                                       <img src="<%- product.thumb_photo %>"  alt="<%- product.title %>" title="<%- product.title %>" class="img-responsive" style="height: 100px;">
+                                       </a> 
+                                    </td>
+                                    <td class="text-left" style="width: 20%;">
+                                       <a href="/catalog/<%- product.link %>/<%- product.id %>" ><%- product.title %></a>                                                                       
+                                    </td>
+                                    <td class="text-left">
+                                       <div class="input-group btn-block" style="max-width: 200px;">
+                                          <input type="text" name="quantity" value="<%- products[i].count %>" size="1" class="form-control">
+                                         
+                                       </div>
+                                    </td>
+                                    <td class="text-left" style="width: 20%;">  
+                                       <textarea rows="4" cols="30" name="comment" placeholder='Здесь вы можете написать пожелания, просьбы и рекомендаци. После заполнения нажмите "обновить"'><%- products[i].comment %></textarea>
+                                    </td>
+                                    <td class="text-right"><%- product.price_text %></td>
+                                    <td class="text-right"><%- spaces(product.price * products[i].count) %></td>
+                                    <td class="text-center">
+                                       <a href="cart/delete/<%- product.link %>/<%- product.id %>">
+                                          <button type="button" data-toggle="tooltip" title="" data-original-title="Удалить" style="background-color: red; color: #fff; border: none; border-radius: 10%; padding: 10px;">
+                                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon"> 
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                                             </svg>
+                                          </button>
+                                       </a>
+                                    </td>
+                                 </tr>
+                                 <%  }  %> 
+                              </tbody>
+                           </table>  
+                        </div>
+                        <!--
+                        <div class="row text-center" style="margin-top: 40px; margin-bottom: 80px;">
+                           <a href="/order" style="background-color: red; color: #fff; padding: 20px;">Оформление заказа</a>
+                        </div>
+                        !-->
+                        <div class="row text-center" style="margin-top: 10px;">
+                           <h3 style="color: #000; padding: 10px;">К оплате: <%- spaces(totalPrice) %></h3>
+                        </div>
+                     </form>
+
+                      
+
+                  </div>
+               </div>
+            </div>
+            <% } %>  
+         </div>
+      </div>
+      <%- include('includes/footer')%>   
+   </body>
+</html>

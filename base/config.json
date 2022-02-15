@@ -1,0 +1,66 @@
+{  
+	"ip": "",
+	"domen": "doremi-sklad.ru",
+	"port": 80,
+	"name": "Магазин мебели ДоРеМи", 
+	"group_id": 1111,
+	"m_group_id": -11111,
+	"comment_post_vk": 11111,
+	"url_bd": "",
+
+	"referalPoints": 100,
+
+	"token_group": "",
+	"token_page": "",
+
+	"spectra_token_group": "",
+	"spectra_id": 11111,
+	"main_chat_vk": 1,
+
+	"catalog": [  
+		{ "id": 51,  "name": "в наличии", 				"file": "in_stock", 	 		"time":  5000},
+		{ "id": 47,  "name": "акция", 					"file": "sale", 	 			"time":  10000},
+
+		{ "id": 72,  "name": "прямые диваны", 			"file": "straight_sofas",  		"time":  30000},
+		{ "id": 73,  "name": "угловые диваны", 			"file": "corner_sofas", 		"time":  50000},
+		{ "id": 74,  "name": "диваны трансформеры", 	"file": "sofas_transformers", 	"time":  60000},
+		{ "id": 17,  "name": "кресла",				 	"file": "chairs", 				"time":  80000},
+
+		{ "id": 15,  "name": "матрасы", 				"file": "mattresses", 			"time":  95000},
+		{ "id": 65,  "name": "беспружинные матрасы", 	"file": "springless_mattresses","time":  105000},
+		{ "id": 66,  "name": "рулонные матрасы", 		"file": "rollup_mattresses", 	"time":  110000},
+		{ "id": 77,  "name": "подушки для сна", 		"file": "pillows", 				"time":  116000},
+
+		{ "id": 5,   "name": "шкафы-купе", 				"file": "wardrobes", 			"time":  130000},
+
+		{ "id": 62,  "name": "шкафы распашные", 		"file": "swing_cabinets", 		"time":  150000},
+
+		{ "id": 4,   "name": "гостиные", 				"file": "living_rooms", 		"time":  170000},
+		
+		{ "id": 13,  "name": "кровати", 				"file": "beds", 				"time":  190000}, 
+
+		{ "id": 64,  "name": "детские матрасы", 		"file": "children_mattresses",  "time":  205000}, 
+
+		{ "id": 11,  "name": "спальные гарнитуры", 		"file": "sleeping_sets", 		"time":  230000}, 
+		 
+		
+		{ "id": 8,   "name": "детская мебель", 			"file": "childrens_furniture", 	"time":  270000}, 
+		{ "id": 75,  "name": "детские диваны", 			"file": "childrens_sofas", 		"time":  290000}, 
+		{ "id": 71,  "name": "двухярусные кровати", 	"file": "bunk_beds", 			"time":  310000}, 
+		
+		{ "id": 64,  "name": "детские матрасы", 		"file": "childrens_mattresses", "time":  325000}, 
+		
+		{ "id": 9,   "name": "комоды", 					"file": "dressers", 			"time":  350000},  
+		
+		{ "id": 6,   "name": "прихожие", 				"file": "hallways", 			"time":  390000},  
+		
+		{ "id": 14,  "name": "малые формы", 			"file": "small_forms", 			"time":  430000}, 
+		{ "id": 7,   "name": "журнальные столики", 		"file": "coffee_tables", 		"time":  450000}, 
+		{ "id": 58,  "name": "туаленые столики", 		"file": "dressing_tables", 		"time":  460000}, 
+		{ "id": 10,  "name": "компьютерные столы", 		"file": "computer_desks", 		"time":  480000}, 
+		{ "id": 36,  "name": "тумбы под ТВ", 			"file": "tv_cabinets", 			"time":  500000} 
+
+	]
+}
+
+ 
